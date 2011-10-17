@@ -249,6 +249,25 @@ Charm.prototype.cursor = function (visible) {
     return this;
 };
 
+Charm.prototype.enableScroll = function(){
+    if (arguments.length === 0 || arguments[0] === 'screen')
+        this.write(encode('[r'));
+    else{
+        var start = arguments[0],
+            end = arguments[1];
+        this.write(encode('[' + start + ';' + end + 'r'));
+    }
+    return this;
+};
+
+Charm.prototype.scrollUp = function(){
+    this.write(encode('M'));
+};
+
+Charm.prototype.scrollDown = function(){
+    this.write(encode('D'));
+};
+
 var extractCodes = exports.extractCodes = function (buf) {
     var codes = [];
     var start = -1;
