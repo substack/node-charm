@@ -185,7 +185,7 @@ Charm.prototype.erase = function (s) {
         this.write(encode('[1J'));
     }
     else if (s === 'screen') {
-        this.write(encode('[1J'));
+        this.write(encode('[2J'));
     }
     else {
         this.emit('error', new Error('Unknown erase type: ' + s));
