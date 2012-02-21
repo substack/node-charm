@@ -39,7 +39,7 @@ var Charm = exports.Charm = function (input, output) {
         self.emit('error', new Error('output stream required'));
     }
     
-    if (input === process.stdin) {
+    if (input && typeof input.fd === 'number' && tty.isatty(input.fd)) {
         tty.setRawMode(true);
         input.resume();
     }
