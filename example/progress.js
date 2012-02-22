@@ -1,4 +1,4 @@
-var charm = require('charm')(process);
+var charm = require('../')(process);
 
 charm.write("Progress: 0 %");
 var i = 0;
@@ -14,3 +14,6 @@ var increment = function () {
 };
 
 var loop = setInterval(increment, 50);
+
+charm.on('^C',process.exit);
+
