@@ -40,7 +40,7 @@ var Charm = exports.Charm = function (input, output) {
     }
     
     if (input && typeof input.fd === 'number' && tty.isatty(input.fd)) {
-        tty.setRawMode(true);
+        process.stdin.setRawMode(true);
         input.resume();
     }
     
