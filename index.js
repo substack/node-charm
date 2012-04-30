@@ -45,6 +45,12 @@ var Charm = exports.Charm = function (input, output) {
         }
         else tty.setRawMode(true);
         input.resume();
+
+        input.on('keypress', function(char, key) {
+            if (key && key.ctrl && key.name == 'c') {
+                process.exit()
+            }
+        });
     }
     
     if (input) {
