@@ -214,11 +214,14 @@ Charm.prototype.display = function (attr) {
 };
 
 Charm.prototype.foreground = function (color) {
-    if(typeof color === 'number') {
-        if(color >= 0 && color < 256) var c = '38;5;'+color;
-        else this.emit('error', new Error('Color out of range: ' + color))
-    }else {
-        c = {
+    if (typeof color === 'number') {
+        if (color < 0 || color >= 256) {
+            this.emit('error', new Error('Color out of range: ' + color));
+        }
+        this.write(encode('[38;5;' + color + 'm'));
+    }
+    else {
+        var c = {
             black : 30,
             red : 31,
             green : 32,
@@ -228,18 +231,22 @@ Charm.prototype.foreground = function (color) {
             cyan : 36,
             white : 37
         }[color.toLowerCase()];
+        
         if (!c) this.emit('error', new Error('Unknown color: ' + color));
+        this.write(encode('[' + c + 'm'));
     }
-    this.write(encode('[' + c + 'm'));
     return this;
 };
 
 Charm.prototype.background = function (color) {
-    if(typeof color === 'number') {
-        if(color >= 0 && color < 256) var c = '48;5;'+color;
-        else this.emit('error', new Error('Color out of range: ' + color))
-    }else {
-        c = {
+    if (typeof color === 'number') {
+        if (color < 0 || color >= 256) {
+            this.emit('error', new Error('Color out of range: ' + color));
+        }
+        this.write(encode('[48;5;' + color + 'm'));
+    }
+    else {
+        var c = {
           black : 40,
           red : 41,
           green : 42,
@@ -249,9 +256,10 @@ Charm.prototype.background = function (color) {
           cyan : 46,
           white : 47
         }[color.toLowerCase()];
+        
         if (!c) this.emit('error', new Error('Unknown color: ' + color));
+        this.write(encode('[' + c + 'm'));
     }
-    this.write(encode('[' + c + 'm'));
     return this;
 };
 
