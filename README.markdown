@@ -171,6 +171,7 @@ Set the foreground color with the string `color`, which can be:
 * black
 * white
 
+or `color` can be an integer from 0 to 255, inclusive.
 
 charm.background(color)
 -----------------------
@@ -185,6 +186,8 @@ Set the background color with the string `color`, which can be:
 * magenta
 * black
 * white
+
+or `color` can be an integer from 0 to 255, inclusive.
 
 charm.cursor(visible)
 ---------------------
