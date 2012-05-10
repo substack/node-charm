@@ -87,6 +87,10 @@ Charm.prototype.write = function (buf) {
 
 
 Charm.prototype.destroy = function () {
+    this.end();
+};
+
+Charm.prototype.end = function () {
     this.emit('end');
 };
 
