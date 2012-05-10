@@ -14,7 +14,8 @@ lucky
 -----
 
 ````javascript
-var charm = require('charm')(process);
+var charm = require('charm')();
+charm.pipe(process.stdout);
 charm.reset();
 
 var colors = [ 'red', 'cyan', 'yellow', 'green', 'blue' ];
@@ -37,13 +38,6 @@ var iv = setInterval(function () {
     charm.position(0, 1);
     offset ++;
 }, 150);
- 
-charm.on('data', function (buf) {
-    if (buf[0] === 3) {
-        clearInterval(iv);
-        charm.destroy();
-    }
-});
 ````
 
 events
@@ -66,32 +60,40 @@ methods
 var charm = require('charm')(param or stream, ...)
 --------------------------------------------------
 
-Create a new `charm` given a `param` with `stdout` and `stdin` streams, such as
-`process` or by passing the streams in themselves separately as parameters.
+Create a new readable/writable `charm` stream.
 
-Protip: you can pass in an http response object as an output stream and it will
-just work™.
+You can pass in readable or writable streams as parameters and they will be
+piped to or from accordingly. You can also pass `process` in which case
+`process.stdin` and `process.stdout` will be used.
+
+You can `pipe()` to and from the `charm` object you get back.
 
 charm.reset()
 -------------
 
 Reset the entire screen, like the /usr/bin/reset command.
 
-charm.destroy()
----------------
+charm.destroy(), charm.end()
+----------------------------
 
-Destroy the input stream.
+Emit an `"end"` event downstream.
 
 charm.write(msg)
 ----------------
 
 Pass along `msg` to the output stream.
 
-charm.position(x, y) or charm.position(cb)
-------------------------------------------
+charm.position(x, y)
+--------------------
 
-Set the cursor position to the absolute coordinates `x, y` or query the position
-and get the response as `cb(x, y)`.
+Set the cursor position to the absolute coordinates `x, y`.
+
+charm.position(cb)
+------------------
+
+Query the absolute cursor position from the input stream through the output
+stream (the shell does this automatically) and get the response back as
+`cb(x, y)`.
 
 charm.move(x, y)
 ----------------
@@ -114,7 +116,7 @@ charm.left(x)
 Move the cursor left by `x` columns.
 
 charm.right(x)
--------------
+--------------
 
 Move the cursor right by `x` columns.
 
@@ -199,4 +201,6 @@ install
 
 With [npm](http://npmjs.org) do:
 
-    npm install charm
+```
+npm install charm
+```
