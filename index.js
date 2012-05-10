@@ -90,7 +90,8 @@ Charm.prototype.destroy = function () {
     this.end();
 };
 
-Charm.prototype.end = function () {
+Charm.prototype.end = function (buf) {
+    if (buf) this.write(buf);
     this.emit('end');
 };
 
