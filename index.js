@@ -30,7 +30,7 @@ var exports = module.exports = function () {
         if (process.stdin.setRawMode) {
             process.stdin.setRawMode(true);
         }
-        else tty.setRawMode(true);
+        else process.stdin.setRawMode(true);
     }
     
     var charm = new Charm;
