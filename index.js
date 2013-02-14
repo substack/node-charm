@@ -43,10 +43,23 @@ var exports = module.exports = function () {
         charm.pipe(output);
     }
     
+    charm.once('^C', process.exit);
+    charm.once('end', function () {
+      if (input) {
+          if (typeof input.fd === 'number' && tty.isatty(input.fd)) {
+            if (process.stdin.setRawMode) {
+                process.stdin.setRawMode(false);
+            }
+            else tty.setRawMode(false);
+          }
+          input.destroy();
+      }
+    });
+
     return charm;
 };
 
-function Charm () {
+var Charm = exports.Charm = function Charm () {
     this.writable = true;
     this.readable = true;
     this.pending = [];

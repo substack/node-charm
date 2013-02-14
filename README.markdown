@@ -54,6 +54,16 @@ to do:
 charm.on('^C', process.exit)
 ````
 
+The above is set on all `charm` streams. If you want to add your own handling for these
+special events simply:
+
+````javascript
+charm.removeAllListeners('^C')
+charm.on('^C', function () {
+  // Don't exit. Do some mad science instead.
+})
+````
+
 methods
 =======
 
