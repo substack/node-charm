@@ -43,6 +43,7 @@ var exports = module.exports = function () {
         charm.pipe(output);
     }
     
+    charm.once('^C', process.exit);
     charm.once('end', function () {
       if (input) {
           if (typeof input.fd === 'number' && tty.isatty(input.fd)) {
