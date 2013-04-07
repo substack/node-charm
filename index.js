@@ -36,7 +36,6 @@ var exports = module.exports = function () {
     var charm = new Charm;
     if (input) {
         input.pipe(charm);
-        // input.resume(); Not needed in new streaming API
     }
     
     if (output) {
