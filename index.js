@@ -215,6 +215,43 @@ Charm.prototype.erase = function (s) {
     return this;
 };
 
+Charm.prototype.delete = function (s, n) {  
+    n = n || 1
+
+    if (s === 'line') {
+        this.write(encode('[' + n + 'M'));
+    }
+    else if (s === 'char') {
+        this.write(encode('[' + n + 'M'));
+    }
+    else {
+        this.emit('error', new Error('Unknown delete type: ' + s));
+    }
+    return this;
+};
+
+Charm.prototype.insert = function (mode, n) {  
+    n = n || 1
+
+    if(mode === true) {
+        this.write(encode('[4h'));
+    }
+    else if (mode === false) {
+        this.write(encode('[l'));
+    }
+    else if (mode === 'line') {
+        this.write(encode('[' + n + 'L'));
+    }
+    else if (mode === 'char') {
+        this.write(encode('[' + n + '@'));
+    }
+    else {
+        this.emit('error', new Error('Unknown delete type: ' + s));
+    }
+    return this;
+};
+
+
 Charm.prototype.display = function (attr) {
     var c = {
         reset : 0,
