@@ -154,6 +154,23 @@ Erase a region defined by the string `s`.
 * up - erase everything above the current line
 * screen - erase the entire screen
 
+charm.delete(mode, n)
+---------------------
+Delete `'line'` or `'char'`s. `delete` differs from erase
+because it does not write over the deleted characters with whitesapce,
+but instead removes the deleted space.
+
+`mode` can be `'line'` or `'char'`. `n` is the number of items to be deleted.
+`n` must be a positive integer.
+
+The cursor position is not updated.
+
+charm.insert(mode, n)
+---------------------
+
+Insert space into the terminal. `insert` is the opposite of` delete`,
+and the arguments are the same.
+
 charm.display(attr)
 -------------------
 
