@@ -231,3 +231,10 @@ With [npm](http://npmjs.org) do:
 ```
 npm install charm
 ```
+
+licensing
+=========
+
+Copyright 2011, 2012, 2013 James Halliday <mail@substack.net>
+
+Licensed under the MIT license, see LICENSE for details.
