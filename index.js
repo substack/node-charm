@@ -64,7 +64,7 @@ var Charm = exports.Charm = function Charm () {
     this.pending = [];
 }
 
-Charm.prototype = new Stream;
+Charm.prototype = Stream.prototype;
 
 Charm.prototype.write = function (buf) {
     var self = this;
