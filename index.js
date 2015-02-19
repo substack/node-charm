@@ -212,7 +212,7 @@ Charm.prototype.erase = function (s) {
         this.write(encode('[1J'));
     }
     else if (s === 'screen') {
-        this.write(encode('[1J'));
+        this.write(encode('[2J'));
     }
     else {
         this.emit('error', new Error('Unknown erase type: ' + s));
@@ -227,7 +227,7 @@ Charm.prototype.delete = function (s, n) {
         this.write(encode('[' + n + 'M'));
     }
     else if (s === 'char') {
-        this.write(encode('[' + n + 'M'));
+        this.write(encode('[' + n + 'X'));
     }
     else {
         this.emit('error', new Error('Unknown delete type: ' + s));
