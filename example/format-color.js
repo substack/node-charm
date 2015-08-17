@@ -10,3 +10,6 @@ charm
   .write('no format. no colors.')
   .move(10, 10)
   .write('by demand.')
+
+charm.setColors(true)
+charm.foreground('blue').write('yesh')
