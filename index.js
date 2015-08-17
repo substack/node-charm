@@ -111,6 +111,15 @@ Charm.prototype.write = function (buf) {
     return self;
 };
 
+Charm.prototype.setFormat = function (b) {
+    this.format = b
+    return this
+}
+
+Charm.prototype.setColors = function (b) {
+    this.colors = b
+    return this
+}
 
 Charm.prototype.destroy = function () {
     this.end();
