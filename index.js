@@ -62,6 +62,8 @@ var Charm = exports.Charm = function Charm () {
     this.writable = true;
     this.readable = true;
     this.pending = [];
+    
+    this.pipe(process.stdout);
 }
 
 Charm.prototype = new Stream;
