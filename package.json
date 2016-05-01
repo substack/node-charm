@@ -22,6 +22,9 @@
         "escape",
         "sequence"
     ],
+    "dependencies": {
+      "inherits": "^2.0.1"
+    },
     "author" : {
         "name" : "James Halliday",
         "email" : "mail@substack.net",
