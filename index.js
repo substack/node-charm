@@ -110,12 +110,9 @@ Charm.prototype.end = function (buf) {
 };
 
 Charm.prototype.reset = function (cb) {
-    // resets the screen on iTerm, which appears
-    // to lack support for the reset character.
-    this.write(encode('[0m'));
     this.write(encode('[2J'));
+    this.write(encode('[3J'));
 
-    this.write(encode('c'));
     return this;
 };
 
