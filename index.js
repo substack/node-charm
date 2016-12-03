@@ -214,7 +214,7 @@ Charm.prototype.erase = function (s) {
         this.write(encode('[1J'));
     }
     else if (s === 'screen') {
-        this.write(encode('[1J'));
+        this.write(encode('[2J'));
     }
     else {
         this.emit('error', new Error('Unknown erase type: ' + s));
@@ -329,6 +329,25 @@ Charm.prototype.background = function (color) {
 Charm.prototype.cursor = function (visible) {
     this.write(encode(visible ? '[?25h' : '[?25l'));
     return this;
+};
+
+Charm.prototype.enableScroll = function(){
+    if (arguments.length === 0 || arguments[0] === 'screen')
+        this.write(encode('[r'));
+    else{
+        var start = arguments[0],
+            end = arguments[1];
+        this.write(encode('[' + start + ';' + end + 'r'));
+    }
+    return this;
+};
+
+Charm.prototype.scrollUp = function(){
+    this.write(encode('M'));
+};
+
+Charm.prototype.scrollDown = function(){
+    this.write(encode('D'));
 };
 
 var extractCodes = exports.extractCodes = function (buf) {
